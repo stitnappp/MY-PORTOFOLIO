@@ -3,259 +3,281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portofolio & CV – Syahrul Azhar</title>
-  <meta name="description" content="Portofolio & CV Syahrul Azhar: pengalaman kerja, pendidikan, skill, pencapaian, dan kontak." />
+  <title>Syahrul Azhar — Portofolio & CV</title>
+  <meta name="description" content="Portofolio & CV Syahrul Azhar: pengalaman kerja, pendidikan, skill, kontak." />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    /* keyframes micro-animations */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    .shine {
+      background: linear-gradient(110deg, rgba(255,255,255,.06) 8%, rgba(255,255,255,.22) 18%, rgba(255,255,255,.06) 33%);
+      background-size: 200% 100%;
+      animation: shimmer 2.2s linear infinite;
+    }
+    /* reveal on scroll */
+    .reveal { opacity:0; transform:translateY(16px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.show { opacity:1; transform:none; }
+  </style>
 
-  <!-- JSON-LD: Person (SEO/ATS friendly). Ganti semua placeholder sesuai data Anda -->
+  <!-- JSON-LD: Person -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Syahrul Azhar",
-    "alternateName":"ITSMorvo",
-    "jobTitle":"Software Developer | Automation Engineer",
-    "email":"mailto: syahrulazhar213@gmail.com",
-    "telephone":"+62-877-3817-7861",
-    "url":"https://stitnappp.github.io/MY-PORTOFOLIO/",
-    "address":{
-      "@type":"PostalAddress",
-      "Jln. Gatot Subroto no 10. Dusun Pesantren rt/rw: 010/004",
-      "addressLocality":"Losari, Cirebon",
-      "addressRegion":"Jawa Barat",
-      "postalCode":"45192",
-      "addressCountry":"ID"
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Syahrul Azhar",
+    "email": "mailto:syahrulazhar213@gmail.com",
+    "telephone": "+62-877-3817-7861",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ds. Losari Kidul",
+      "addressLocality": "Cirebon",
+      "addressRegion": "Jawa Barat",
+      "addressCountry": "ID"
     },
-    "sameAs":[
-      "https://github.com/stitnappp",
-      "https://www.linkedin.com/in/username",
-      "https://x.com/0xmorvo",
-      "https://instagram.com/ruel_51"
-    ],
-    "knowsAbout":["JavaScript","Node.js","Python","TailwindCSS","React","Crypto Bot","Automation","E-commerce"],
-    "workExperience":[
-      {"@type":"OrganizationRole","roleName":"Freelance Developer","startDate":"2021","endDate":"Present","description":"Membangun bot multi-chain, automation tools, dan web app."},
-      {"@type":"OrganizationRole","roleName":"Designer - ADZSTORE","startDate":"2020","endDate":"Present","description":"Branding, desain apparel, dan identitas visual."}
-    ]
+    "sameAs": []
   }
   </script>
-
-  <style>
-    /* smooth scroll agar "paths" terasa mulus */
-    html { scroll-behavior: smooth; }
-  </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans">
+<body class="bg-slate-950 text-slate-100 selection:bg-fuchsia-500/30">
 
-  <!-- Navbar (paths/anchors) -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur border-b border-gray-800">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="h-14 flex items-center justify-between">
-        <a href="#home" class="text-purple-400 font-bold tracking-wide">MORVO</a>
-        <div class="flex gap-4 text-sm">
-          <a href="#about" class="hover:text-purple-400">Tentang</a>
-          <a href="#portfolio" class="hover:text-purple-400">Portofolio</a>
-          <a href="#experience" class="hover:text-purple-400">Pengalaman</a>
-          <a href="#education" class="hover:text-purple-400">Pendidikan</a>
-          <a href="#skills" class="hover:text-purple-400">Skills</a>
-          <a href="#achievements" class="hover:text-purple-400">Pencapaian</a>
-          <a href="#contact" class="hover:text-purple-400">Kontak</a>
-        </div>
+  <!-- Parallax gradient background -->
+  <div id="bg" class="pointer-events-none fixed inset-0 -z-10 opacity-70"
+       style="background:
+        radial-gradient(40% 30% at 10% 10%, rgba(168,85,247,.35), transparent 60%),
+        radial-gradient(35% 40% at 90% 20%, rgba(14,165,233,.35), transparent 60%),
+        radial-gradient(45% 45% at 50% 90%, rgba(236,72,153,.28), transparent 60%)">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-slate-900/60 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="#home" class="font-semibold tracking-wide text-fuchsia-300">SYAHRUL</a>
+      <div class="hidden sm:flex items-center gap-5 text-sm">
+        <a href="#about" class="hover:text-fuchsia-300">Tentang</a>
+        <a href="#experience" class="hover:text-fuchsia-300">Pengalaman</a>
+        <a href="#education" class="hover:text-fuchsia-300">Pendidikan</a>
+        <a href="#skills" class="hover:text-fuchsia-300">Skills</a>
+        <a href="#contact" class="hover:text-fuchsia-300">Kontak</a>
       </div>
+      <a href="cv.pdf" target="_blank"
+         class="text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 font-semibold">
+        Download CV
+      </a>
     </div>
   </nav>
 
-  <!-- Hero / Home -->
-  <section id="home" class="min-h-[90vh] flex items-center justify-center text-center bg-gradient-to-br from-purple-700 via-indigo-700 to-slate-900">
-    <div class="px-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">Halo, Saya Morvo 👋</h1>
-      <p class="mt-4 text-lg md:text-xl text-purple-100/90">Software Developer • Automation • Designer</p>
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a href="#experience" class="px-5 py-3 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-200">Lihat Pengalaman</a>
-        <a href="#contact" class="px-5 py-3 border border-white/70 rounded-lg font-semibold hover:bg-white/10">Kontak</a>
-        <a href="cv.pdf" target="_blank" class="px-5 py-3 bg-purple-500 rounded-lg font-semibold hover:bg-purple-600">📄 Download CV (PDF)</a>
+  <!-- Hero -->
+  <header id="home" class="pt-28 pb-14">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-[1.1fr_.9fr] gap-8 items-center">
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-300/90 shine rounded-full px-3 py-1 border border-white/10">
+          Available for work
+        </div>
+        <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">
+          Syahrul Azhar
+        </h1>
+        <p class="mt-3 text-lg text-slate-300">
+          Network & Web Enthusiast • Customer Service • Warehouse Ops
+        </p>
+        <p class="mt-5 text-slate-300/90">
+          DS. Losari Kidul, Cirebon ·
+          <a class="underline decoration-dotted hover:text-white" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a> ·
+          <a class="underline decoration-dotted hover:text-white" href="tel:+6287738177861">0877-3817-7861</a>
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#experience" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-200">Lihat Pengalaman</a>
+          <a href="#contact" class="px-5 py-3 rounded-xl border border-white/20 hover:bg-white/5">Hubungi Saya</a>
+        </div>
       </div>
 
-      <!-- Quick Paths / TOC -->
-      <div class="mt-8 text-sm text-purple-100/80">
-        Quick paths:
-        <a class="underline hover:text-white" href="#achievements">/pencapaian</a> ·
-        <a class="underline hover:text-white" href="#portfolio">/portfolio</a> ·
-        <a class="underline hover:text-white" href="#contact">/kontak</a>
+      <!-- Photo card -->
+      <div class="reveal">
+        <div class="relative group">
+          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-fuchsia-600 to-cyan-500 opacity-40 blur-lg group-hover:opacity-70 transition"></div>
+          <div class="relative rounded-2xl bg-slate-900/70 border border-white/10 overflow-hidden">
+            <img src="photo.jpg" alt="Foto Syahrul Azhar"
+                 class="w-full h-80 object-cover object-center" />
+            <div class="p-4 flex items-center justify-between">
+              <span class="text-sm text-slate-300">Siap kerja & kolaborasi</span>
+              <span class="text-xs px-2 py-1 rounded-md bg-fuchsia-600/20 text-fuchsia-300 border border-fuchsia-500/30">Open to Opportunity</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 mt-2">Ganti <code>photo.jpg</code> dengan foto lu.</p>
       </div>
     </div>
-  </section>
+  </header>
 
   <!-- About -->
-  <section id="about" class="py-16 md:py-20 max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">Tentang Saya</h2>
-    <p class="text-gray-300 leading-relaxed">
-      Saya seorang developer yang fokus pada <b>automation</b>, pembuatan <b>bot crypto</b>, serta
-      <b>web tools</b> untuk e-commerce & sosial media. Saya juga mengerjakan desain branding untuk ADZSTORE.
-      Saya suka bikin solusi yang <i>clean</i>, cepat dipakai, dan mudah dipahami.
-    </p>
-  </section>
-
-  <!-- Portfolio / Projects -->
-  <section id="portfolio" class="py-16 md:py-20 bg-gray-900">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-10 text-purple-400">Portofolio</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="bg-gray-950/70 rounded-xl p-6 border border-gray-800 hover:scale-[1.02] transition">
-          <h3 class="text-xl font-semibold">🚀 Bot Sniper All Chains</h3>
-          <p class="mt-2 text-gray-400">Bot multi-chain untuk monitoring, entry cepat, dan auto-sell.</p>
-          <a class="mt-3 inline-block text-purple-400 underline" href="#experience">Lihat peran saya →</a>
-        </article>
-        <article class="bg-gray-950/70 rounded-xl p-6 border border-gray-800 hover:scale-[1.02] transition">
-          <h3 class="text-xl font-semibold">🎨 Branding ADZSTORE</h3>
-          <p class="mt-2 text-gray-400">Logo, sistem identitas, desain apparel, dan materi promosi.</p>
-          <a class="mt-3 inline-block text-purple-400 underline" href="#achievements">Lihat pencapaian →</a>
-        </article>
-        <article class="bg-gray-950/70 rounded-xl p-6 border border-gray-800 hover:scale-[1.02] transition">
-          <h3 class="text-xl font-semibold">🌐 Web Automation Suite</h3>
-          <p class="mt-2 text-gray-400">Tool posting otomatis, topic finder, dan scheduler konten.</p>
-          <a class="mt-3 inline-block text-purple-400 underline" href="#skills">Tech stack →</a>
-        </article>
-      </div>
+  <section id="about" class="py-12">
+    <div class="max-w-4xl mx-auto px-4 reveal">
+      <h2 class="text-2xl font-bold text-fuchsia-300">About Me</h2>
+      <p class="mt-4 leading-relaxed text-slate-200">
+        Nama saya <b>SYAHRUL AZHAR</b>. Saya adalah seorang yang handal, berdedikasi tinggi, jujur, dan cekatan.
+        Saya mampu menyelesaikan tugas dengan baik dan selalu mengutamakan kerapian dalam setiap pekerjaan.
+        Saya memiliki kepribadian yang ramah, mampu memahami dan menerima masukan, serta responsif terhadap situasi.
+      </p>
     </div>
   </section>
 
   <!-- Experience -->
-  <section id="experience" class="py-16 md:py-20 max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">Pengalaman Kerja</h2>
+  <section id="experience" class="py-14 bg-slate-900/40 border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="reveal text-2xl font-bold text-fuchsia-300">Work Experience</h2>
+      <div class="mt-8 grid gap-5">
 
-    <div class="space-y-6">
-      <!-- item -->
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <h3 class="text-xl font-semibold">Freelance Developer</h3>
-          <span class="text-sm text-gray-400">2021 – Sekarang · Remote</span>
-        </div>
-        <p class="mt-2 text-gray-300">
-          Membangun bot multi-chain (Solana/EVM), automation tools, dan web app ringan untuk klien.
-        </p>
-        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1">
-          <li>Riset & implementasi strategi entry cepat, auto-sell, dan profit monitoring.</li>
-          <li>Mendesain UI/UX sederhana untuk user pemula (Termux & web).</li>
-          <li>Integrasi GitHub Actions & Pages untuk deploy gratis.</li>
-        </ul>
-        <div class="mt-3 text-xs text-gray-400">Stack: Node.js, Python, TailwindCSS, React, Git, APIs.</div>
-      </div>
+        <!-- item -->
+        <article class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5 hover:translate-y-[-2px] transition">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold">Pramuniaga Cashier — PT LION SUPERINDO</h3>
+            <span class="text-sm text-slate-400">Jul 2020 – Mar 2021</span>
+          </div>
+          <ul class="mt-3 text-slate-200 list-disc list-inside space-y-1">
+            <li>Menyambut pelanggan, melayani penjualan, bantu pilih barang & informasi produk.</li>
+            <li>Menangani pembayaran, menjaga kerapian toko, cek stok & bantu promosi.</li>
+            <li>Mengoperasikan kasir, menerima pembayaran, membuat struk belanja.</li>
+          </ul>
+        </article>
 
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <h3 class="text-xl font-semibold">Designer – ADZSTORE</h3>
-          <span class="text-sm text-gray-400">2020 – Sekarang · Cirebon</span>
-        </div>
-        <p class="mt-2 text-gray-300">
-          Mengembangkan identitas visual, desain apparel, packaging, dan materi promosi digital.
-        </p>
-        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1">
-          <li>Membangun guideline cepat untuk produksi & sosial media.</li>
-          <li>Optimasi aset agar konsisten di marketplace & website.</li>
-        </ul>
+        <article class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5 hover:translate-y-[-2px] transition">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold">Network Engineering — Adzkiya.Net</h3>
+            <span class="text-sm text-slate-400">Mei 2021 – Des 2023</span>
+          </div>
+          <ul class="mt-3 text-slate-200 list-disc list-inside space-y-1">
+            <li>Merancang, implementasi, dan pemeliharaan sistem jaringan organisasi/perusahaan.</li>
+            <li>Perencanaan infrastruktur, pemasangan & konfigurasi perangkat, pemantauan kinerja.</li>
+            <li>Pemecahan masalah jaringan; MikroTik & PPPoE client setup.</li>
+          </ul>
+        </article>
+
+        <article class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5 hover:translate-y-[-2px] transition">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold">Sewing Operator — PT BINTANG INDOKARYA GEMILANG</h3>
+            <span class="text-sm text-slate-400">Jan 2024 – Now</span>
+          </div>
+          <ul class="mt-3 text-slate-200 list-disc list-inside space-y-1">
+            <li>Operasikan mesin jahit satu & dua jarum; menjahit bagian sepatu sesuai SOP.</li>
+            <li>Operasikan mesin jahit komputer/MCPS dan kontrol kualitas dasar.</li>
+          </ul>
+        </article>
+
+        <article class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5 hover:translate-y-[-2px] transition">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold">Training Website Development — Bootcamp Yogyakarta</h3>
+            <span class="text-sm text-slate-400">Jun 2019 – Aug 2019</span>
+          </div>
+          <ul class="mt-3 text-slate-200 list-disc list-inside space-y-1">
+            <li>Mengembangkan kode website (HTML), desain estetik (CSS), & dasar optimasi.</li>
+            <li>Eksperimen konfigurasi server Nginx/Apache untuk hosting sederhana.</li>
+          </ul>
+        </article>
+
+        <article class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5 hover:translate-y-[-2px] transition">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold">Admin Gudang — CV Zealin Perfumes Cabang Limbangan</h3>
+            <span class="text-sm text-slate-400">Des 2021 – Feb 2022</span>
+          </div>
+          <ul class="mt-3 text-slate-200 list-disc list-inside space-y-1">
+            <li>Menerima & memeriksa barang masuk; koordinasi dengan pemasok & produksi.</li>
+            <li>Inventarisasi stok berkala, penataan gudang sesuai jenis & karakteristik barang.</li>
+          </ul>
+        </article>
+
       </div>
     </div>
   </section>
 
   <!-- Education -->
-  <section id="education" class="py-16 md:py-20 max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">Pendidikan</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <h3 class="text-lg font-semibold">S1 Informatika – Universitas XYZ</h3>
-        <p class="text-gray-400">2019 – 2023</p>
-        <p class="mt-2 text-gray-300">Fokus pada pemrograman, sistem terdistribusi, dan keamanan.</p>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <h3 class="text-lg font-semibold">SMA Negeri 1 ABC – IPA</h3>
-        <p class="text-gray-400">2016 – 2019</p>
-        <p class="mt-2 text-gray-300">Aktif di klub IT dan desain grafis.</p>
+  <section id="education" class="py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="reveal text-2xl font-bold text-fuchsia-300">Education</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-5">
+        <div class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5">
+          <h3 class="text-lg font-semibold">SMK Islam Diponegoro Brebes</h3>
+          <p class="text-slate-400">2018 – 2021</p>
+        </div>
+        <div class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5">
+          <h3 class="text-lg font-semibold">LPD Al-Bahjah II Cirebon</h3>
+          <p class="text-slate-400">2017 – 2018</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="py-16 md:py-20 max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">Skills</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">JavaScript / Node.js</div>
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">Python</div>
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">React / TailwindCSS</div>
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">Git & GitHub Actions</div>
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">Web Automation & APIs</div>
-      <div class="bg-gray-900 rounded-lg px-4 py-3 border border-gray-800">Crypto Bots (EVM/Solana)</div>
-    </div>
-  </section>
-
-  <!-- Achievements -->
-  <section id="achievements" class="py-16 md:py-20 bg-gray-900">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-6 text-purple-400">Pencapaian</h2>
-      <ul class="space-y-4">
-        <li class="bg-gray-950/70 p-5 rounded-xl border border-gray-800">
-          <b>Top 10 Automation Project</b> – Hackathon Komunitas (2024) · Bot sosial media dengan topic finder & auto-post.
-        </li>
-        <li class="bg-gray-950/70 p-5 rounded-xl border border-gray-800">
-          <b>1000+ Unduhan</b> untuk template bot Termux open-source di GitHub.
-        </li>
-        <li class="bg-gray-950/70 p-5 rounded-xl border border-gray-800">
-          <b>Branding konsisten</b> untuk ADZSTORE: peningkatan CTR konten ±25%.
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CV (Ringkas + Download) -->
-  <section id="cv" class="py-16 md:py-20 max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">CV (Ringkas)</h2>
-    <p class="text-gray-300">Detail lengkap tersedia pada CV PDF.</p>
-    <a href="cv.pdf" target="_blank" class="mt-4 inline-block px-6 py-3 bg-purple-500 rounded-lg font-semibold hover:bg-purple-600">
-      📄 Download CV (PDF)
-    </a>
-  </section>
-
-  <!-- Contact (email, tel, alamat, sosmed) -->
-  <section id="contact" class="py-16 md:py-20 max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-6 text-purple-400">Kontak</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <h3 class="font-semibold">Info Kontak</h3>
-        <ul class="mt-3 space-y-2 text-gray-300">
-          <li>📧 Email: <a class="text-purple-400 underline" href="mailto:morvo@example.com">morvo@example.com</a></li>
-          <li>📱 Telepon/WA: <a class="text-purple-400 underline" href="tel:+6281200000000">+62 812-0000-0000</a></li>
-          <li>🏠 Alamat: Jl. Contoh No. 123, Cirebon, Jawa Barat 45100</li>
-        </ul>
+  <section id="skills" class="py-14 bg-slate-900/40 border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="reveal text-2xl font-bold text-fuchsia-300">Skills</h2>
+      <div class="mt-6 reveal flex flex-wrap gap-3">
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">MikroTik Configuration</span>
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">PPPoE Client Setup</span>
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">HTML/CSS Basics</span>
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">Nginx / Apache Basics</span>
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">Customer Service</span>
+        <span class="px-3 py-2 rounded-xl bg-white/5 border border-white/10">Warehouse Ops</span>
       </div>
-      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
-        <h3 class="font-semibold">Sosial Media</h3>
-        <ul class="mt-3 space-y-2 text-gray-300">
-          <li>GitHub: <a class="text-purple-400 underline" target="_blank" href="https://github.com/ITSMorvo">ITSMorvo</a></li>
-          <li>LinkedIn: <a class="text-purple-400 underline" target="_blank" href="https://www.linkedin.com/in/username">linkedin.com/in/username</a></li>
-          <li>X (Twitter): <a class="text-purple-400 underline" target="_blank" href="https://x.com/username">@username</a></li>
-          <li>Instagram: <a class="text-purple-400 underline" target="_blank" href="https://instagram.com/username">@username</a></li>
-        </ul>
-      </div>
+      <p class="reveal mt-5 text-slate-300"><b>Bahasa:</b> Indonesia, Inggris.</p>
     </div>
+  </section>
 
-    <!-- CTA -->
-    <div class="mt-8">
-      <a href="mailto:morvo@example.com?subject=Kolaborasi%20dengan%20Morvo" class="px-6 py-3 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-200">
-        ✉️ Kirim Email Sekarang
-      </a>
+  <!-- Contact -->
+  <section id="contact" class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="reveal text-2xl font-bold text-fuchsia-300">Kontak</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-5">
+        <div class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5">
+          <h3 class="font-semibold">Email</h3>
+          <a class="mt-1 inline-block underline decoration-dotted hover:text-white"
+             href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a>
+        </div>
+        <div class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5">
+          <h3 class="font-semibold">Telepon</h3>
+          <a class="mt-1 inline-block underline decoration-dotted hover:text-white"
+             href="tel:+6287738177861">0877-3817-7861</a>
+        </div>
+        <div class="reveal rounded-2xl bg-slate-900/70 border border-white/10 p-5">
+          <h3 class="font-semibold">Alamat</h3>
+          <p class="mt-1 text-slate-300">Ds. Losari Kidul, Cirebon, Jawa Barat</p>
+        </div>
+      </div>
+
+      <div class="reveal mt-8 flex flex-wrap gap-3">
+        <a href="cv.pdf" target="_blank" class="px-5 py-3 rounded-xl bg-fuchsia-600 hover:bg-fuchsia-500 font-semibold">📄 Download CV</a>
+        <a href="mailto:syahrulazhar213@gmail.com?subject=Lamaran%20/ %20Kolaborasi"
+           class="px-5 py-3 rounded-xl border border-white/20 hover:bg-white/5">✉️ Email Sekarang</a>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800 bg-gray-950">
-    <div class="max-w-6xl mx-auto px-6 py-6 text-sm text-gray-400 flex flex-wrap items-center justify-between gap-3">
-      <p>© 2025 Morvo</p>
-      <div class="flex gap-3">
-        <a href="#experience" class="hover:text-purple-300">/pengalaman</a>
-        <a href="#achievements" class="hover:text-purple-300">/pencapaian</a>
-        <a href="#contact" class="hover:text-purple-300">/kontak</a>
-      </div>
-    </div>
+  <footer class="py-8 border-t border-white/10 text-center text-sm text-slate-400">
+    © <span id="y"></span> Syahrul Azhar · Dibuat dengan Tailwind & sedikit JS
   </footer>
+
+  <!-- JS: scroll-reveal + subtle parallax -->
+  <script>
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // parallax bg
+    const bg = document.getElementById('bg');
+    window.addEventListener('mousemove', (e)=>{
+      const x = (e.clientX / window.innerWidth - .5) * 8;
+      const y = (e.clientY / window.innerHeight - .5) * 8;
+      bg.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
 </body>
 </html>
