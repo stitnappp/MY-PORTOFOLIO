@@ -4,178 +4,223 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Syahrul Azhar — Portfolio & CV</title>
-  <meta name="description" content="Portofolio & CV Syahrul Azhar: pengalaman kerja, pendidikan, keterampilan, proyek, dan kontak." />
+  <meta name="description" content="Portofolio & CV Syahrul Azhar: pengalaman kerja, proyek, pendidikan, skills, dan kontak." />
+
+  <!-- Fonts + Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { jakarta: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'] }}}}
+  </script>
 
   <style>
     html{scroll-behavior:smooth}
-    /* Anti-blank: defaultnya terlihat */
-    .reveal{opacity:1; transform:none}
-    /* Hanya setelah JS siap (class .reveal-ready) animasi dipakai */
-    .reveal-ready .reveal{opacity:0; transform:translateY(16px); transition:all .7s cubic-bezier(.2,.7,.2,1)}
-    .reveal.show{opacity:1; transform:none}
-    .card{background:rgba(2,6,23,.7);border:1px solid rgba(255,255,255,.08)}
+    /* anti-blank: default terlihat; animasi aktif ketika .reveal-ready dipasang oleh JS */
+    .reveal{opacity:1;transform:none}
+    .reveal-ready .reveal{opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal.show{opacity:1;transform:none}
+
+    /* glass + gradient border */
+    .glass{background:rgba(2,6,23,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08)}
+    [data-theme="light"] .glass{background:rgba(255,255,255,.7);border-color:#e2e8f0}
+    .gradient-border{position:relative}
+    .gradient-border::before{
+      content:""; position:absolute; inset:-1px; z-index:-1; border-radius:inherit;
+      background:linear-gradient(135deg,#a855f7, #06b6d4, #ec4899);
+      filter:blur(8px); opacity:.6;
+    }
+
+    /* animated background */
+    .bg-animated{position:fixed; inset:0; z-index:-10; overflow:hidden}
+    .blob{position:absolute; width:44vw; height:44vw; border-radius:9999px; filter:blur(60px); opacity:.35; animation:float 16s ease-in-out infinite}
+    .blob:nth-child(1){left:-10vw; top:-8vw; background:#a855f7}
+    .blob:nth-child(2){right:-12vw; top:-6vw; background:#06b6d4; animation-delay:-5s}
+    .blob:nth-child(3){left:20vw; bottom:-12vw; background:#ec4899; animation-delay:-10s}
+    @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(2rem,-1rem)}}
+
+    /* project tilt */
+    .tilt{transform-style:preserve-3d; will-change:transform; transition:transform .2s ease}
+    .tilt *{transform:translateZ(20px)}
+
     .muted{color:#94a3b8}
-    [data-theme="light"] body{background:#f6f7fb;color:#0f172a}
-    [data-theme="light"] .card{background:#fff;border-color:#e2e8f0}
+    [data-theme="light"] body{background:#f8fafc;color:#0f172a}
     [data-theme="light"] .muted{color:#475569}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100}
-    .modal.active{display:flex}
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 selection:bg-fuchsia-500/30">
+<body class="font-jakarta bg-slate-950 text-slate-100 selection:bg-fuchsia-500/30">
 
-  <!-- soft gradients background -->
-  <div id="bg" class="pointer-events-none fixed inset-0 -z-10 opacity-70"
-       style="background:
-        radial-gradient(40% 30% at 10% 10%, rgba(168,85,247,.35), transparent 60%),
-        radial-gradient(35% 40% at 90% 20%, rgba(14,165,233,.35), transparent 60%),
-        radial-gradient(45% 45% at 50% 90%, rgba(236,72,153,.28), transparent 60%)"></div>
+  <!-- animated backdrop -->
+  <div class="bg-animated">
+    <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+  </div>
 
-  <!-- NAVBAR -->
-  <nav id="nav" class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-slate-900/60 border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-      <a href="#home" class="font-semibold tracking-wide text-fuchsia-300">SYAHRUL</a>
-      <div class="hidden sm:flex items-center gap-5 text-sm">
-        <a href="#about" class="hover:text-fuchsia-300">Tentang</a>
-        <a href="#experience" class="hover:text-fuchsia-300">Pengalaman</a>
-        <a href="#projects" class="hover:text-fuchsia-300">Proyek</a>
-        <a href="#education" class="hover:text-fuchsia-300">Pendidikan</a>
-        <a href="#skills" class="hover:text-fuchsia-300">Skills</a>
-        <a href="#contact" class="hover:text-fuchsia-300">Kontak</a>
-      </div>
-      <div class="flex items-center gap-2">
-        <button id="themeBtn" class="text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 font-semibold">Gelap</button>
-        <a href="cv.pdf" target="_blank" class="hidden sm:inline text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-white text-slate-900 font-semibold hover:bg-slate-200">Download CV</a>
-      </div>
+  <!-- NAVBAR (glass) -->
+  <nav id="nav" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[78%] rounded-2xl glass px-4 md:px-6 h-14 flex items-center justify-between">
+    <a href="#home" class="font-extrabold tracking-wide">
+      <span class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-pink-400 bg-clip-text text-transparent">SYAHRUL</span>
+    </a>
+    <div class="hidden md:flex items-center gap-5 text-sm">
+      <a href="#about" class="hover:text-fuchsia-300">Tentang</a>
+      <a href="#experience" class="hover:text-fuchsia-300">Pengalaman</a>
+      <a href="#projects" class="hover:text-fuchsia-300">Proyek</a>
+      <a href="#education" class="hover:text-fuchsia-300">Pendidikan</a>
+      <a href="#skills" class="hover:text-fuchsia-300">Skills</a>
+      <a href="#contact" class="hover:text-fuchsia-300">Kontak</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="themeBtn" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/10 hover:bg-white/10">Gelap</button>
+      <a href="cv.pdf" target="_blank" class="hidden sm:inline text-xs px-3 py-1.5 rounded-lg bg-white text-slate-900 font-semibold hover:bg-slate-200">Download CV</a>
     </div>
   </nav>
 
-  <!-- HERO (tanpa .reveal agar selalu tampil) -->
-  <header id="home" class="pt-28 pb-14">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-[1.1fr_.9fr] gap-8 items-center">
+  <!-- HERO -->
+  <header id="home" class="pt-28 md:pt-28 pb-8">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-[1.2fr_.8fr] gap-10 items-center">
       <div>
-        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-300/90 rounded-full px-3 py-1 border border-white/10">Siap bekerja</div>
-        <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">Syahrul Azhar</h1>
-        <p class="mt-3 text-lg muted">Network & Web Enthusiast • Customer Service • Warehouse Ops</p>
-        <p class="mt-5 muted">Ds. Losari Kidul, Cirebon ·
-          <a class="underline decoration-dotted hover:text-inherit" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a> ·
-          <a class="underline decoration-dotted hover:text-inherit" href="tel:+6287738177861">0877-3817-7861</a>
+        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-200/90 px-3 py-1 rounded-full glass border border-white/10">
+          Siap bekerja
+        </div>
+        <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">
+          Syahrul Azhar
+        </h1>
+        <p class="mt-4 text-lg muted">Network & Web Enthusiast • Customer Service • Warehouse Ops</p>
+        <p class="mt-4 muted">
+          Ds. Losari Kidul, Cirebon ·
+          <a class="underline decoration-dotted hover:text-white" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a> ·
+          <a class="underline decoration-dotted hover:text-white" href="tel:+6287738177861">0877-3817-7861</a>
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href="#experience" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-200">Lihat Pengalaman</a>
-          <a href="#contact" class="px-5 py-3 rounded-xl border border-white/20 hover:bg-white/5">Hubungi Saya</a>
+          <a href="#contact" class="px-5 py-3 rounded-xl glass border border-white/10 hover:bg-white/10">Hubungi Saya</a>
         </div>
       </div>
+
       <div>
-        <div class="relative group">
-          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-fuchsia-600 to-cyan-500 opacity-40 blur-lg group-hover:opacity-70 transition"></div>
-          <div class="relative rounded-2xl card overflow-hidden">
+        <div class="relative gradient-border rounded-2xl p-[1px]">
+          <div class="rounded-2xl overflow-hidden glass">
             <img src="photo.jpg" alt="Foto Syahrul Azhar" class="w-full h-80 object-cover object-center" />
-            <div class="p-4 flex items-center justify-between">
-              <span class="text-sm muted">Siap kerja & kolaborasi</span>
-              <span class="text-xs px-2 py-1 rounded-md bg-fuchsia-600/20 text-fuchsia-300 border border-fuchsia-500/30">Open to Opportunity</span>
-            </div>
           </div>
         </div>
+        <p class="text-xs muted mt-2">Ganti <code>photo.jpg</code> dengan foto kamu.</p>
       </div>
     </div>
   </header>
 
   <!-- ABOUT -->
-  <section id="about" class="py-12">
+  <section id="about" class="py-10">
     <div class="max-w-4xl mx-auto px-4 reveal">
-      <h2 class="text-2xl font-bold text-fuchsia-500">Tentang Saya</h2>
-      <p class="mt-4 leading-relaxed">
-        Nama saya SYAHRUL AZHAR. Saya seorang yang handal, berdedikasi tinggi, jujur, dan cekatan.
-        Saya mampu menyelesaikan tugas dengan baik dan selalu mengutamakan kerapian dalam setiap pekerjaan.
-        Saya memiliki kepribadian yang ramah, mampu memahami dan menerima masukan, serta responsif terhadap situasi.
-      </p>
+      <h2 class="text-2xl font-extrabold mb-3">Tentang <span class="text-fuchsia-400">Saya</span></h2>
+      <div class="glass rounded-2xl p-6 leading-relaxed">
+        Nama saya <b>SYAHRUL AZHAR</b>. Saya seorang yang handal, berdedikasi tinggi, jujur, dan cekatan.
+        Mampu menyelesaikan tugas dengan rapi, ramah, mudah menerima masukan, dan responsif terhadap situasi.
+      </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="py-14 bg-slate-900/40 border-y border-white/5">
+  <!-- EXPERIENCE (timeline) -->
+  <section id="experience" class="py-14">
     <div class="max-w-5xl mx-auto px-4">
-      <h2 class="reveal text-2xl font-bold text-fuchsia-500">Pengalaman Kerja</h2>
-      <div class="mt-8 grid gap-5">
-        <article class="reveal rounded-2xl card p-5">
-          <div class="flex flex-wrap justify-between gap-2">
-            <h3 class="text-lg font-semibold">Pramuniaga Cashier — PT LION SUPERINDO</h3>
-            <span class="text-sm muted">Jul 2020 – Mar 2021</span>
-          </div>
-          <ul class="mt-3 list-disc list-inside space-y-1">
-            <li>Menyambut pelanggan, melayani penjualan, membantu memilih barang & info produk.</li>
-            <li>Menangani pembayaran, menjaga kerapian toko, memeriksa stok & membantu promosi.</li>
-            <li>Mengoperasikan mesin kasir, menerima pembayaran, membuat struk belanja.</li>
-          </ul>
-        </article>
+      <h2 class="reveal text-2xl font-extrabold mb-8">Pengalaman <span class="text-fuchsia-400">Kerja</span></h2>
 
-        <article class="reveal rounded-2xl card p-5">
-          <div class="flex flex-wrap justify-between gap-2">
-            <h3 class="text-lg font-semibold">Network Engineering — Adzkiya.Net</h3>
-            <span class="text-sm muted">Mei 2021 – Des 2023</span>
+      <div class="relative pl-6 border-l-2 border-white/10 space-y-8">
+        <!-- item -->
+        <div class="reveal relative">
+          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"></span>
+          <div class="glass rounded-xl p-5">
+            <div class="flex flex-wrap justify-between">
+              <h3 class="font-semibold">Pramuniaga Cashier — PT LION SUPERINDO</h3>
+              <span class="text-sm muted">Jul 2020 – Mar 2021</span>
+            </div>
+            <ul class="mt-2 list-disc list-inside text-sm leading-relaxed">
+              <li>Melayani pelanggan, bantu pilih barang & info produk.</li>
+              <li>Menangani pembayaran, kerapian toko, cek stok & promosi.</li>
+              <li>Operasikan mesin kasir & cetak struk belanja.</li>
+            </ul>
           </div>
-          <ul class="mt-3 list-disc list-inside space-y-1">
-            <li>Merancang, mengimplementasikan, dan memelihara sistem jaringan.</li>
-            <li>Pemasangan & konfigurasi perangkat, pemantauan kinerja jaringan.</li>
-            <li>Pemecahan masalah; konfigurasi MikroTik & PPPoE client.</li>
-          </ul>
-        </article>
+        </div>
 
-        <article class="reveal rounded-2xl card p-5">
-          <div class="flex flex-wrap justify-between gap-2">
-            <h3 class="text-lg font-semibold">Sewing Operator — PT BINTANG INDOKARYA GEMILANG</h3>
-            <span class="text-sm muted">Jan 2024 – Now</span>
+        <div class="reveal relative">
+          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"></span>
+          <div class="glass rounded-xl p-5">
+            <div class="flex flex-wrap justify-between">
+              <h3 class="font-semibold">Network Engineering — Adzkiya.Net</h3>
+              <span class="text-sm muted">Mei 2021 – Des 2023</span>
+            </div>
+            <ul class="mt-2 list-disc list-inside text-sm leading-relaxed">
+              <li>Rancang, implementasi, dan pemeliharaan jaringan.</li>
+              <li>Instalasi & konfigurasi perangkat; monitoring performa.</li>
+              <li>Troubleshooting; MikroTik & PPPoE client.</li>
+            </ul>
           </div>
-          <ul class="mt-3 list-disc list-inside space-y-1">
-            <li>Mengoperasikan mesin jahit satu & dua jarum sesuai SOP.</li>
-            <li>Mengoperasikan mesin jahit komputer/MCPS dan quality control dasar.</li>
-          </ul>
-        </article>
+        </div>
 
-        <article class="reveal rounded-2xl card p-5">
-          <div class="flex flex-wrap justify-between gap-2">
-            <h3 class="text-lg font-semibold">Training Website Development — BOOTCAMP YOGYAKARTA</h3>
-            <span class="text-sm muted">Jun 2019 – Aug 2019</span>
+        <div class="reveal relative">
+          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"></span>
+          <div class="glass rounded-xl p-5">
+            <div class="flex flex-wrap justify-between">
+              <h3 class="font-semibold">Sewing Operator — PT BINTANG INDOKARYA GEMILANG</h3>
+              <span class="text-sm muted">Jan 2024 – Now</span>
+            </div>
+            <ul class="mt-2 list-disc list-inside text-sm leading-relaxed">
+              <li>Operasi mesin jahit satu & dua jarum sesuai SOP.</li>
+              <li>Operasi mesin jahit komputer/MCPS & QC dasar.</li>
+            </ul>
           </div>
-          <ul class="mt-3 list-disc list-inside space-y-1">
-            <li>Mengembangkan kode website dengan HTML & desain CSS.</li>
-            <li>Mengoptimalkan kinerja website, konfigurasi server Nginx/Apache.</li>
-          </ul>
-        </article>
+        </div>
 
-        <article class="reveal rounded-2xl card p-5">
-          <div class="flex flex-wrap justify-between gap-2">
-            <h3 class="text-lg font-semibold">Admin Gudang — CV ZEALIN PERFUMES (Limbangan)</h3>
-            <span class="text-sm muted">Des 2021 – Feb 2022</span>
+        <div class="reveal relative">
+          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"></span>
+          <div class="glass rounded-xl p-5">
+            <div class="flex flex-wrap justify-between">
+              <h3 class="font-semibold">Training Website Development — BOOTCAMP YOGYAKARTA</h3>
+              <span class="text-sm muted">Jun 2019 – Aug 2019</span>
+            </div>
+            <ul class="mt-2 list-disc list-inside text-sm leading-relaxed">
+              <li>Dasar HTML/CSS & desain antarmuka.</li>
+              <li>Eksperimen hosting: Nginx/Apache.</li>
+            </ul>
           </div>
-          <ul class="mt-3 list-disc list-inside space-y-1">
-            <li>Menerima barang masuk & berkoordinasi dengan pemasok/produksi.</li>
-            <li>Pengecekan jumlah/kondisi barang, inventarisasi stok berkala.</li>
-            <li>Pengaturan penyimpanan barang di gudang sesuai jenis & karakteristik.</li>
-          </ul>
-        </article>
+        </div>
+
+        <div class="reveal relative">
+          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400"></span>
+          <div class="glass rounded-xl p-5">
+            <div class="flex flex-wrap justify-between">
+              <h3 class="font-semibold">Admin Gudang — CV ZEALIN PERFUMES (Limbangan)</h3>
+              <span class="text-sm muted">Des 2021 – Feb 2022</span>
+            </div>
+            <ul class="mt-2 list-disc list-inside text-sm leading-relaxed">
+              <li>Penerimaan & pemeriksaan barang; koordinasi pemasok/produksi.</li>
+              <li>Inventarisasi stok berkala & penataan gudang.</li>
+            </ul>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section id="projects" class="py-14">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="reveal text-2xl font-bold text-fuchsia-500">Proyek</h2>
-      <div class="mt-8 grid md:grid-cols-3 gap-5">
-        <div class="reveal card rounded-xl p-5 cursor-pointer hover:scale-105 transition" onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
-          <h3 class="font-semibold">🚀 Bot Multi-Chain</h3>
-          <p class="text-sm muted">Crypto trading automation</p>
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="reveal text-2xl font-extrabold mb-8">Proyek <span class="text-fuchsia-400">Terpilih</span></h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal tilt glass rounded-2xl p-6 cursor-pointer hover:shadow-xl hover:shadow-fuchsia-500/10"
+             onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
+          <h3 class="font-semibold text-lg">🚀 Bot Multi-Chain</h3>
+          <p class="muted mt-1 text-sm">Crypto trading automation</p>
         </div>
-        <div class="reveal card rounded-xl p-5 cursor-pointer hover:scale-105 transition" onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE.')">
-          <h3 class="font-semibold">🎨 ADZSTORE Branding</h3>
-          <p class="text-sm muted">Design & Identity</p>
+        <div class="reveal tilt glass rounded-2xl p-6 cursor-pointer hover:shadow-xl hover:shadow-fuchsia-500/10"
+             onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE. Konsistensi visual lintas platform.')">
+          <h3 class="font-semibold text-lg">🎨 ADZSTORE Branding</h3>
+          <p class="muted mt-1 text-sm">Design & Identity</p>
         </div>
-        <div class="reveal card rounded-xl p-5 cursor-pointer hover:scale-105 transition" onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
-          <h3 class="font-semibold">🌐 Web Automation</h3>
-          <p class="text-sm muted">Social Media Tools</p>
+        <div class="reveal tilt glass rounded-2xl p-6 cursor-pointer hover:shadow-xl hover:shadow-fuchsia-500/10"
+             onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
+          <h3 class="font-semibold text-lg">🌐 Web Automation</h3>
+          <p class="muted mt-1 text-sm">Social Media Tools</p>
         </div>
       </div>
     </div>
@@ -183,7 +228,7 @@
 
   <!-- MODAL -->
   <div id="modal" class="modal">
-    <div class="bg-white dark:bg-slate-900 rounded-xl p-6 max-w-md mx-auto relative card">
+    <div class="rounded-2xl glass p-6 max-w-md mx-auto relative">
       <button class="absolute top-2 right-3 text-xl" onclick="closeModal()">✖</button>
       <h3 id="modalTitle" class="text-lg font-bold"></h3>
       <p id="modalBody" class="mt-3 text-sm muted"></p>
@@ -193,14 +238,14 @@
   <!-- EDUCATION -->
   <section id="education" class="py-14">
     <div class="max-w-5xl mx-auto px-4">
-      <h2 class="reveal text-2xl font-bold text-fuchsia-500">Pendidikan</h2>
-      <div class="mt-6 grid md:grid-cols-2 gap-5">
-        <div class="reveal card rounded-2xl p-5">
-          <h3 class="text-lg font-semibold">SMK Islam Diponegoro Brebes</h3>
+      <h2 class="reveal text-2xl font-extrabold mb-8">Pendidikan</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="reveal glass rounded-2xl p-6">
+          <h3 class="font-semibold">SMK Islam Diponegoro Brebes</h3>
           <p class="muted">2018 – 2021</p>
         </div>
-        <div class="reveal card rounded-2xl p-5">
-          <h3 class="text-lg font-semibold">LPD Al-Bahjah II Cirebon</h3>
+        <div class="reveal glass rounded-2xl p-6">
+          <h3 class="font-semibold">LPD Al-Bahjah II Cirebon</h3>
           <p class="muted">2017 – 2018</p>
         </div>
       </div>
@@ -208,16 +253,16 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="py-14 bg-slate-900/40 border-y border-white/5">
+  <section id="skills" class="py-14">
     <div class="max-w-5xl mx-auto px-4">
-      <h2 class="reveal text-2xl font-bold text-fuchsia-500">Skills</h2>
-      <div class="mt-6 reveal flex flex-wrap gap-3">
-        <span class="px-3 py-2 rounded-xl card">MikroTik Configuration</span>
-        <span class="px-3 py-2 rounded-xl card">PPPoE Client Setup</span>
-        <span class="px-3 py-2 rounded-xl card">HTML/CSS Basics</span>
-        <span class="px-3 py-2 rounded-xl card">Nginx / Apache Basics</span>
-        <span class="px-3 py-2 rounded-xl card">Customer Service</span>
-        <span class="px-3 py-2 rounded-xl card">Warehouse Ops</span>
+      <h2 class="reveal text-2xl font-extrabold mb-6">Skills</h2>
+      <div class="reveal flex flex-wrap gap-3">
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">MikroTik Configuration</span>
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">PPPoE Client Setup</span>
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">HTML/CSS Basics</span>
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">Nginx / Apache Basics</span>
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">Customer Service</span>
+        <span class="px-3 py-2 rounded-xl glass border border-white/10">Warehouse Ops</span>
       </div>
       <p class="reveal mt-5"><b>Bahasa</b>: Indonesia, Inggris.</p>
     </div>
@@ -226,29 +271,29 @@
   <!-- CONTACT -->
   <section id="contact" class="py-16">
     <div class="max-w-5xl mx-auto px-4">
-      <h2 class="reveal text-2xl font-bold text-fuchsia-500">Kontak</h2>
-      <div class="mt-6 grid md:grid-cols-3 gap-5">
-        <div class="reveal card rounded-2xl p-5">
+      <h2 class="reveal text-2xl font-extrabold mb-8">Kontak</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal glass rounded-2xl p-6">
           <h3 class="font-semibold">Email</h3>
-          <a class="mt-1 inline-block underline decoration-dotted hover:text-inherit" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a>
+          <a class="mt-1 inline-block underline decoration-dotted hover:text-white" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a>
         </div>
-        <div class="reveal card rounded-2xl p-5">
+        <div class="reveal glass rounded-2xl p-6">
           <h3 class="font-semibold">Telepon</h3>
-          <a class="mt-1 inline-block underline decoration-dotted hover:text-inherit" href="tel:+6287738177861">0877-3817-7861</a>
+          <a class="mt-1 inline-block underline decoration-dotted hover:text-white" href="tel:+6287738177861">0877-3817-7861</a>
         </div>
-        <div class="reveal card rounded-2xl p-5">
+        <div class="reveal glass rounded-2xl p-6">
           <h3 class="font-semibold">Alamat</h3>
           <p class="mt-1 muted">Ds. Losari Kidul, Cirebon, Jawa Barat</p>
         </div>
       </div>
 
       <form id="contactForm" class="reveal mt-8 grid gap-4">
-        <input type="text" name="from_name" placeholder="Nama Anda" required class="p-3 rounded-lg card">
-        <input type="email" name="reply_to" placeholder="Email Anda" required class="p-3 rounded-lg card">
-        <textarea name="message" placeholder="Pesan" required rows="4" class="p-3 rounded-lg card"></textarea>
+        <input type="text" name="from_name" placeholder="Nama Anda" required class="p-3 rounded-xl glass border border-white/10">
+        <input type="email" name="reply_to" placeholder="Email Anda" required class="p-3 rounded-xl glass border border-white/10">
+        <textarea name="message" placeholder="Pesan" required rows="4" class="p-3 rounded-xl glass border border-white/10"></textarea>
         <div class="flex items-center gap-3">
-          <button type="submit" class="px-5 py-3 rounded-xl bg-fuchsia-600 hover:bg-fuchsia-500 font-semibold">Kirim</button>
-          <a href="cv.pdf" target="_blank" class="px-5 py-3 rounded-xl border border-white/20 hover:bg-white/5">📄 Download CV</a>
+          <button type="submit" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-200">Kirim</button>
+          <a href="cv.pdf" target="_blank" class="px-5 py-3 rounded-xl glass border border-white/10 hover:bg-white/10">📄 Download CV</a>
         </div>
       </form>
       <p id="formStatus" class="mt-3 text-sm"></p>
@@ -256,69 +301,58 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-8 border-t border-white/10 text-center text-sm muted">
-    © <span id="y"></span> Syahrul Azhar · Dibuat dengan Tailwind & sedikit JS
+  <footer class="py-10 text-center text-sm muted">
+    © <span id="y"></span> Syahrul Azhar · Tampilan modern dengan Tailwind
   </footer>
 
-  <!-- SCRIPTS (defer semuanya & fail-safe) -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" defer></script>
+  <!-- EmailJS + Interactions -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // ready
+    document.addEventListener('DOMContentLoaded', ()=>{
       // tahun
       document.getElementById('y').textContent = new Date().getFullYear();
 
       // theme toggle
-      const root = document.documentElement;
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const saved = localStorage.getItem('theme');
-      const themeBtn = document.getElementById('themeBtn');
-      function applyTheme(t){
-        root.setAttribute('data-theme', t);
-        if(t==='light'){
-          document.body.classList.remove('bg-slate-950','text-slate-100');
-          document.body.classList.add('bg-white','text-slate-900');
-          themeBtn.textContent = 'Terang';
-        } else {
-          document.body.classList.add('bg-slate-950','text-slate-100');
-          themeBtn.textContent = 'Gelap';
-        }
-        localStorage.setItem('theme', t);
+      const root=document.documentElement, prefersDark=matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved=localStorage.getItem('theme'); const themeBtn=document.getElementById('themeBtn');
+      function applyTheme(t){ root.setAttribute('data-theme',t);
+        if(t==='light'){ document.body.classList.remove('bg-slate-950','text-slate-100');
+          document.body.classList.add('bg-white','text-slate-900'); themeBtn.textContent='Terang';
+        } else { document.body.classList.add('bg-slate-950','text-slate-100'); themeBtn.textContent='Gelap'; }
+        localStorage.setItem('theme',t);
       }
-      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
-      themeBtn.onclick = ()=>applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+      applyTheme(saved || (prefersDark?'dark':'light'));
+      themeBtn.onclick=()=>applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
 
-      // reveal on scroll (aktifkan animasi baru setelah observer siap)
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
-      }, {threshold:.12});
+      // reveal
+      const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});
       document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-      root.classList.add('reveal-ready'); // <— penting: baru aktifkan animasi sekarang
-
-      // parallax background
-      const bg = document.getElementById('bg');
-      window.addEventListener('mousemove', (e)=>{
-        const x=(e.clientX/window.innerWidth-.5)*8, y=(e.clientY/window.innerHeight-.5)*8;
-        bg.style.transform=`translate(${x}px, ${y}px)`;
-      });
+      root.classList.add('reveal-ready');
 
       // modal
-      window.openModal = (title, body) => {
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalBody').textContent = body;
-        document.getElementById('modal').classList.add('active');
-      };
-      window.closeModal = () => document.getElementById('modal').classList.remove('active');
+      window.openModal=(t,b)=>{document.getElementById('modalTitle').textContent=t;document.getElementById('modalBody').textContent=b;document.getElementById('modal').classList.add('active')}
+      window.closeModal=()=>document.getElementById('modal').classList.remove('active')
 
-      // EmailJS (opsional, aman kalau CDN gagal)
-      const form = document.getElementById('contactForm');
-      form.addEventListener('submit', function(e){
+      // project tilt
+      document.querySelectorAll('.tilt').forEach(card=>{
+        card.addEventListener('mousemove',e=>{
+          const r=card.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+          const rx=((y/r.height)-.5)*-10, ry=((x/r.width)-.5)*10;
+          card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+        card.addEventListener('mouseleave',()=>card.style.transform='rotateX(0) rotateY(0)');
+      });
+
+      // EmailJS (opsional)
+      const form=document.getElementById('contactForm'); const status=document.getElementById('formStatus');
+      form.addEventListener('submit',function(e){
         e.preventDefault();
-        const status = document.getElementById('formStatus');
-        if(!(window.emailjs && emailjs.sendForm)){ status.textContent = "EmailJS belum dikonfigurasi."; return; }
+        if(!(window.emailjs && emailjs.sendForm)){ status.textContent="EmailJS belum dikonfigurasi."; return; }
         try{ emailjs.init("YOUR_PUBLIC_KEY"); }catch(e){}
         emailjs.sendForm('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID', this)
-          .then(()=>{ status.textContent="Pesan terkirim ✅"; this.reset(); })
-          .catch(()=>{ status.textContent="Gagal terkirim ❌"; });
+         .then(()=>{status.textContent="Pesan terkirim ✅"; this.reset();})
+         .catch(()=>{status.textContent="Gagal terkirim ❌";});
       });
     });
   </script>
