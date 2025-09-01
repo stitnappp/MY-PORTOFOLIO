@@ -5,42 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Syahrul Azhar — Portfolio</title>
   <meta name="description" content="Portofolio Syahrul Azhar: pengalaman kerja, proyek, pendidikan, skills, dan kontak." />
-
   <!-- Fonts + Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{fontFamily:{pop:['Poppins','ui-sans-serif','system-ui']}}}}</script>
-
   <style>
     html{scroll-behavior:smooth}
-    /* anti-blank: default terlihat; animasi aktif jika .reveal-ready ditambah JS */
+    /* anti-blank: default terlihat; animasi aktif setelah .reveal-ready ditambahkan JS */
     .reveal{opacity:1;transform:none}
-    .reveal-ready .reveal{opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal-ready .reveal{opacity:0;transform:translateY(20px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal-left{transform:translateX(-40px)}
+    .reveal-right{transform:translateX(40px)}
+    .reveal-up{transform:translateY(40px)}
     .reveal.show{opacity:1;transform:none}
 
-    /* neon look */
-    .neon-title{background:linear-gradient(180deg,#ff47c6 0%,#b026ff 55%,#8a2be2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 24px rgba(178,26,255,.35))}
-    .neon-pill{background:linear-gradient(145deg,#ff47c6,#b026ff); box-shadow:0 6px 18px rgba(176,38,255,.35), inset 0 2px 0 rgba(255,255,255,.25)}
-    .neon-pill:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(176,38,255,.45), inset 0 2px 0 rgba(255,255,255,.3)}
-    .glass{background:rgba(13,18,35,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.08)}
+    .neon-title{background:linear-gradient(180deg,#ff47c6 0%,#b026ff 55%,#8a2be2 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 6px 24px rgba(178,26,255,.35))}
+    .neon-pill{background:linear-gradient(145deg,#ff47c6,#b026ff);
+      box-shadow:0 6px 18px rgba(176,38,255,.35), inset 0 2px 0 rgba(255,255,255,.25)}
+    .neon-pill:hover{transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(176,38,255,.45), inset 0 2px 0 rgba(255,255,255,.3)}
+
+    .glass{background:rgba(13,18,35,.65);backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.08)}
     [data-theme="light"] .glass{background:rgba(255,255,255,.75);border-color:#e2e8f0}
     .muted{color:#94a3b8}
     [data-theme="light"] body{background:#f7f8fc;color:#0f172a}
     [data-theme="light"] .muted{color:#475569}
 
-    /* bg blobs */
     .bg-animated{position:fixed; inset:0; z-index:-10; overflow:hidden}
-    .blob{position:absolute; width:42vw; height:42vw; border-radius:9999px; filter:blur(70px); opacity:.35; animation:float 18s ease-in-out infinite}
+    .blob{position:absolute; width:42vw; height:42vw; border-radius:9999px;
+      filter:blur(70px); opacity:.35; animation:float 18s ease-in-out infinite}
     .blob:nth-child(1){left:-12vw; top:-10vw; background:#b026ff}
     .blob:nth-child(2){right:-12vw; top:-6vw; background:#00d0ff; animation-delay:-6s}
     .blob:nth-child(3){left:20vw; bottom:-14vw; background:#ff47c6; animation-delay:-12s}
     @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(2rem,-1rem)}}
 
-    /* tile cards */
     .tile{transition:transform .18s ease, box-shadow .18s ease}
     .tile:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,.25)}
+    .icon{width:36px;height:36px;flex-shrink:0}
   </style>
 </head>
 <body class="font-pop bg-slate-950 text-slate-100 selection:bg-fuchsia-500/30">
@@ -65,54 +71,44 @@
     </div>
   </nav>
 
-  <!-- HERO — ala video: judul besar + sub + pill + tiles -->
-  <header id="home" class="pt-28 md:pt-28 pb-4">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p class="text-sm tracking-wider muted">Syahrul's Portfolio</p>
-      <h1 class="mt-2 text-4xl md:text-6xl font-extrabold neon-title">Hello, I'm Syahrul!</h1>
-      <p class="mt-3 text-xl md:text-2xl text-white/90">Network & Web Enthusiast</p>
-      <p class="mt-2 max-w-2xl mx-auto muted">Welcome to my portfolio page. Scroll to see my experience, projects, skills, and how to contact me.</p>
+  <!-- HERO -->
+  <header id="home" class="pt-28 md:pt-28 pb-4 text-center">
+    <p class="text-sm tracking-wider muted">Syahrul's Portfolio</p>
+    <h1 class="mt-2 text-4xl md:text-6xl font-extrabold neon-title">Hello, I'm Syahrul!</h1>
+    <p class="mt-3 text-xl md:text-2xl text-white/90">Network & Web Enthusiast</p>
+    <p class="mt-2 max-w-2xl mx-auto muted">Welcome to my portfolio page. Scroll to see my experience, projects, skills, and how to contact me.</p>
 
-      <div class="mt-6 flex items-center justify-center gap-3">
-        <a href="#contact" class="neon-pill inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold">
-          Contact Me <span>💬</span>
-        </a>
-        <a href="#experience" class="px-5 py-3 rounded-full glass border border-white/10 hover:bg-white/10">My Experience</a>
-      </div>
+    <div class="mt-6 flex items-center justify-center gap-3">
+      <a href="#contact" class="neon-pill inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold">Contact Me</a>
+      <a href="#experience" class="px-5 py-3 rounded-full glass border border-white/10 hover:bg-white/10">My Experience</a>
+    </div>
 
-      <!-- tiles -->
-      <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-        <a href="#about" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">👤</div>
-          <h3 class="mt-2 font-semibold text-lg">About Me</h3>
-          <p class="text-sm muted">Ringkasan diri dan tujuan.</p>
-        </a>
-        <a href="#experience" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">🧭</div>
-          <h3 class="mt-2 font-semibold text-lg">Experience</h3>
-          <p class="text-sm muted">Riwayat kerja lengkap.</p>
-        </a>
-        <a href="#skills" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">🧩</div>
-          <h3 class="mt-2 font-semibold text-lg">Skills</h3>
-          <p class="text-sm muted">Teknis & non-teknis.</p>
-        </a>
-        <a href="#projects" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">🛠️</div>
-          <h3 class="mt-2 font-semibold text-lg">Projects</h3>
-          <p class="text-sm muted">Beberapa karya pilihan.</p>
-        </a>
-        <a href="#education" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">🎓</div>
-          <h3 class="mt-2 font-semibold text-lg">Education</h3>
-          <p class="text-sm muted">Riwayat pendidikan.</p>
-        </a>
-        <a href="#contact" class="tile glass rounded-2xl p-5 text-left">
-          <div class="text-3xl">📬</div>
-          <h3 class="mt-2 font-semibold text-lg">Contact</h3>
-          <p class="text-sm muted">Email, telepon & form.</p>
-        </a>
-      </div>
+    <!-- tiles with SVG icons -->
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+      <a href="#about" class="tile glass rounded-2xl p-5 text-left reveal-left">
+        <svg class="icon text-pink-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.2c-3.2 0-9.5 1.6-9.5 4.9v2.2h19v-2.2c0-3.3-6.3-4.9-9.5-4.9z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">About Me</h3>
+      </a>
+      <a href="#experience" class="tile glass rounded-2xl p-5 text-left reveal-up">
+        <svg class="icon text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v2h18V5c0-1.1-.9-2-2-2zm0 6H3v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9zm-7 3v5h-2v-5h2z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">Experience</h3>
+      </a>
+      <a href="#skills" class="tile glass rounded-2xl p-5 text-left reveal-right">
+        <svg class="icon text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-1.1-.9-2-2-2H5C3.9 5 3 5.9 3 7v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">Skills</h3>
+      </a>
+      <a href="#projects" class="tile glass rounded-2xl p-5 text-left reveal-left">
+        <svg class="icon text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M3 7h18v10H3zM5 5h14V3H5v2zm0 16h14v-2H5v2z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">Projects</h3>
+      </a>
+      <a href="#education" class="tile glass rounded-2xl p-5 text-left reveal-up">
+        <svg class="icon text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM3 19h18v2H3z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">Education</h3>
+      </a>
+      <a href="#contact" class="tile glass rounded-2xl p-5 text-left reveal-right">
+        <svg class="icon text-sky-400" fill="currentColor" viewBox="0 0 24 24"><path d="M21 8V7l-3 2-2-1-3 2-2-1-3 2-2-1-3 2v7h18V8zM3 6l9-5 9 5-9 5L3 6z"/></svg>
+        <h3 class="mt-2 font-semibold text-lg">Contact</h3>
+      </a>
     </div>
   </header>
 
@@ -127,12 +123,12 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE: timeline -->
+  <!-- EXPERIENCE (Timeline) -->
   <section id="experience" class="py-12">
     <div class="max-w-5xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-8">Work <span class="neon-title">Experience</span></h2>
       <div class="relative pl-6 border-l-2 border-white/10 space-y-8">
-        <div class="reveal relative">
+        <div class="reveal-left relative">
           <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Pramuniaga Cashier — PT LION SUPERINDO</h3><span class="text-sm muted">Jul 2020 – Mar 2021</span></div>
@@ -143,7 +139,7 @@
             </ul>
           </div>
         </div>
-        <div class="reveal relative">
+        <div class="reveal-right relative">
           <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Network Engineering — Adzkiya.Net</h3><span class="text-sm muted">Mei 2021 – Des 2023</span></div>
@@ -154,7 +150,7 @@
             </ul>
           </div>
         </div>
-        <div class="reveal relative">
+        <div class="reveal-left relative">
           <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Sewing Operator — PT BINTANG INDOKARYA GEMILANG</h3><span class="text-sm muted">Jan 2024 – Now</span></div>
@@ -164,7 +160,7 @@
             </ul>
           </div>
         </div>
-        <div class="reveal relative">
+        <div class="reveal-right relative">
           <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Training Website Development — BOOTCAMP YOGYAKARTA</h3><span class="text-sm muted">Jun 2019 – Aug 2019</span></div>
@@ -174,7 +170,7 @@
             </ul>
           </div>
         </div>
-        <div class="reveal relative">
+        <div class="reveal-left relative">
           <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Admin Gudang — CV ZEALIN PERFUMES (Limbangan)</h3><span class="text-sm muted">Des 2021 – Feb 2022</span></div>
@@ -193,15 +189,15 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-8">Selected <span class="neon-title">Projects</span></h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="reveal glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
+        <div class="reveal-left glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
           <h3 class="font-semibold text-lg">🚀 Bot Multi-Chain</h3>
           <p class="muted mt-1 text-sm">Crypto trading automation</p>
         </div>
-        <div class="reveal glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE. Konsistensi visual lintas platform.')">
+        <div class="reveal-up glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE. Konsistensi visual lintas platform.')">
           <h3 class="font-semibold text-lg">🎨 ADZSTORE Branding</h3>
           <p class="muted mt-1 text-sm">Design & Identity</p>
         </div>
-        <div class="reveal glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
+        <div class="reveal-right glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
           <h3 class="font-semibold text-lg">🌐 Web Automation</h3>
           <p class="muted mt-1 text-sm">Social Media Tools</p>
         </div>
@@ -223,11 +219,11 @@
     <div class="max-w-5xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-6">Education</h2>
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="reveal glass rounded-2xl p-6">
+        <div class="reveal-left glass rounded-2xl p-6">
           <h3 class="font-semibold">SMK Islam Diponegoro Brebes</h3>
           <p class="muted">2018 – 2021</p>
         </div>
-        <div class="reveal glass rounded-2xl p-6">
+        <div class="reveal-right glass rounded-2xl p-6">
           <h3 class="font-semibold">LPD Al-Bahjah II Cirebon</h3>
           <p class="muted">2017 – 2018</p>
         </div>
@@ -239,7 +235,7 @@
   <section id="skills" class="py-12">
     <div class="max-w-5xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-6">Skills</h2>
-      <div class="reveal flex flex-wrap gap-3">
+      <div class="reveal-up flex flex-wrap gap-3">
         <span class="px-3 py-2 rounded-full glass border border-white/10">MikroTik Configuration</span>
         <span class="px-3 py-2 rounded-full glass border border-white/10">PPPoE Client Setup</span>
         <span class="px-3 py-2 rounded-full glass border border-white/10">HTML/CSS Basics</span>
@@ -247,6 +243,7 @@
         <span class="px-3 py-2 rounded-full glass border border-white/10">Customer Service</span>
         <span class="px-3 py-2 rounded-full glass border border-white/10">Warehouse Ops</span>
       </div>
+      <p class="reveal mt-5"><b>Bahasa</b>: Indonesia, Inggris.</p>
     </div>
   </section>
 
@@ -255,15 +252,15 @@
     <div class="max-w-5xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-6">Contact</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="reveal glass rounded-2xl p-6">
+        <div class="reveal-left glass rounded-2xl p-6">
           <h3 class="font-semibold">Email</h3>
           <a class="mt-1 inline-block underline decoration-dotted hover:text-white" href="mailto:syahrulazhar213@gmail.com">syahrulazhar213@gmail.com</a>
         </div>
-        <div class="reveal glass rounded-2xl p-6">
+        <div class="reveal-up glass rounded-2xl p-6">
           <h3 class="font-semibold">Phone</h3>
           <a class="mt-1 inline-block underline decoration-dotted hover:text-white" href="tel:+6287738177861">0877-3817-7861</a>
         </div>
-        <div class="reveal glass rounded-2xl p-6">
+        <div class="reveal-right glass rounded-2xl p-6">
           <h3 class="font-semibold">Address</h3>
           <p class="mt-1 muted">Ds. Losari Kidul, Cirebon, Jawa Barat</p>
         </div>
@@ -306,15 +303,17 @@
       btn.onclick=()=>apply(root.getAttribute('data-theme')==='dark'?'light':'dark');
 
       // reveal on scroll
-      const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});
-      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      const io=new IntersectionObserver((es)=>es.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}
+      }),{threshold:.12});
+      document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-up').forEach(el=>io.observe(el));
       root.classList.add('reveal-ready');
 
       // modal
       window.openModal=(t,b)=>{document.getElementById('modalTitle').textContent=t;document.getElementById('modalBody').textContent=b;document.getElementById('modal').style.display='flex'}
       window.closeModal=()=>document.getElementById('modal').style.display='none'
 
-      // EmailJS (opsional aman)
+      // EmailJS (opsional; aman kalau tak dikonfigurasi)
       const form=document.getElementById('contactForm'), status=document.getElementById('formStatus');
       form.addEventListener('submit',function(e){
         e.preventDefault();
