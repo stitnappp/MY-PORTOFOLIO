@@ -5,22 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Syahrul Azhar — Portfolio</title>
   <meta name="description" content="Portofolio Syahrul Azhar: pengalaman kerja, proyek, pendidikan, skills, dan kontak." />
+
   <!-- Fonts + Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{fontFamily:{pop:['Poppins','ui-sans-serif','system-ui']}}}}</script>
+
   <style>
     html{scroll-behavior:smooth}
-    /* anti-blank: default terlihat; animasi aktif setelah .reveal-ready ditambahkan JS */
-    .reveal{opacity:1;transform:none}
-    .reveal-ready .reveal{opacity:0;transform:translateY(20px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
-    .reveal-left{transform:translateX(-40px)}
-    .reveal-right{transform:translateX(40px)}
-    .reveal-up{transform:translateY(40px)}
-    .reveal.show{opacity:1;transform:none}
 
+    /* --- REVEAL (anti-blank + arah slide) --- */
+    .reveal,.reveal-left,.reveal-right,.reveal-up{opacity:1;transform:none}
+    .reveal-ready .reveal      {opacity:0;transform:translateY(20px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal-ready .reveal-left {opacity:0;transform:translateX(-40px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal-ready .reveal-right{opacity:0;transform:translateX( 40px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal-ready .reveal-up   {opacity:0;transform:translateY( 40px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal.show,.reveal-left.show,.reveal-right.show,.reveal-up.show{opacity:1!important;transform:none!important}
+
+    /* Neon + Glass */
     .neon-title{background:linear-gradient(180deg,#ff47c6 0%,#b026ff 55%,#8a2be2 100%);
       -webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 6px 24px rgba(178,26,255,.35))}
@@ -36,6 +40,7 @@
     [data-theme="light"] body{background:#f7f8fc;color:#0f172a}
     [data-theme="light"] .muted{color:#475569}
 
+    /* Background blobs */
     .bg-animated{position:fixed; inset:0; z-index:-10; overflow:hidden}
     .blob{position:absolute; width:42vw; height:42vw; border-radius:9999px;
       filter:blur(70px); opacity:.35; animation:float 18s ease-in-out infinite}
@@ -44,9 +49,15 @@
     .blob:nth-child(3){left:20vw; bottom:-14vw; background:#ff47c6; animation-delay:-12s}
     @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(2rem,-1rem)}}
 
+    /* Cards & icons */
     .tile{transition:transform .18s ease, box-shadow .18s ease}
     .tile:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,.25)}
     .icon{width:36px;height:36px;flex-shrink:0}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:1.5rem; border-left:2px solid rgba(255,255,255,.1)}
+    .timeline .dot{position:absolute; left:-9px; top:.25rem; width:16px; height:16px; border-radius:9999px;
+      background:linear-gradient(90deg,#fb5ab7,#a855f7)}
   </style>
 </head>
 <body class="font-pop bg-slate-950 text-slate-100 selection:bg-fuchsia-500/30">
@@ -55,7 +66,7 @@
   <div class="bg-animated"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
 
   <!-- NAVBAR -->
-  <nav id="nav" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[78%] h-14 px-4 md:px-6 rounded-2xl glass flex items-center justify-between">
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[78%] h-14 px-4 md:px-6 rounded-2xl glass flex items-center justify-between">
     <a href="#home" class="font-extrabold tracking-wide"><span class="neon-title">SYAHRUL</span></a>
     <div class="hidden md:flex items-center gap-5 text-sm">
       <a href="#about" class="hover:text-pink-300">About</a>
@@ -83,29 +94,29 @@
       <a href="#experience" class="px-5 py-3 rounded-full glass border border-white/10 hover:bg-white/10">My Experience</a>
     </div>
 
-    <!-- tiles with SVG icons -->
-    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-      <a href="#about" class="tile glass rounded-2xl p-5 text-left reveal-left">
+    <!-- TILES -->
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4 items-stretch">
+      <a href="#about" class="tile glass rounded-2xl p-5 text-left reveal-left h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-pink-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.2c-3.2 0-9.5 1.6-9.5 4.9v2.2h19v-2.2c0-3.3-6.3-4.9-9.5-4.9z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">About Me</h3>
       </a>
-      <a href="#experience" class="tile glass rounded-2xl p-5 text-left reveal-up">
+      <a href="#experience" class="tile glass rounded-2xl p-5 text-left reveal-up h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v2h18V5c0-1.1-.9-2-2-2zm0 6H3v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9zm-7 3v5h-2v-5h2z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">Experience</h3>
       </a>
-      <a href="#skills" class="tile glass rounded-2xl p-5 text-left reveal-right">
+      <a href="#skills" class="tile glass rounded-2xl p-5 text-left reveal-right h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-1.1-.9-2-2-2H5C3.9 5 3 5.9 3 7v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">Skills</h3>
       </a>
-      <a href="#projects" class="tile glass rounded-2xl p-5 text-left reveal-left">
+      <a href="#projects" class="tile glass rounded-2xl p-5 text-left reveal-left h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M3 7h18v10H3zM5 5h14V3H5v2zm0 16h14v-2H5v2z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">Projects</h3>
       </a>
-      <a href="#education" class="tile glass rounded-2xl p-5 text-left reveal-up">
+      <a href="#education" class="tile glass rounded-2xl p-5 text-left reveal-up h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM3 19h18v2H3z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">Education</h3>
       </a>
-      <a href="#contact" class="tile glass rounded-2xl p-5 text-left reveal-right">
+      <a href="#contact" class="tile glass rounded-2xl p-5 text-left reveal-right h-full min-h-[120px] flex flex-col justify-start">
         <svg class="icon text-sky-400" fill="currentColor" viewBox="0 0 24 24"><path d="M21 8V7l-3 2-2-1-3 2-2-1-3 2-2-1-3 2v7h18V8zM3 6l9-5 9 5-9 5L3 6z"/></svg>
         <h3 class="mt-2 font-semibold text-lg">Contact</h3>
       </a>
@@ -127,9 +138,9 @@
   <section id="experience" class="py-12">
     <div class="max-w-5xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-8">Work <span class="neon-title">Experience</span></h2>
-      <div class="relative pl-6 border-l-2 border-white/10 space-y-8">
-        <div class="reveal-left relative">
-          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
+      <div class="timeline space-y-8">
+        <div class="relative reveal-left">
+          <span class="dot"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Pramuniaga Cashier — PT LION SUPERINDO</h3><span class="text-sm muted">Jul 2020 – Mar 2021</span></div>
             <ul class="mt-2 list-disc list-inside text-sm muted">
@@ -139,8 +150,9 @@
             </ul>
           </div>
         </div>
-        <div class="reveal-right relative">
-          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
+
+        <div class="relative reveal-right">
+          <span class="dot"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Network Engineering — Adzkiya.Net</h3><span class="text-sm muted">Mei 2021 – Des 2023</span></div>
             <ul class="mt-2 list-disc list-inside text-sm muted">
@@ -150,8 +162,9 @@
             </ul>
           </div>
         </div>
-        <div class="reveal-left relative">
-          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
+
+        <div class="relative reveal-left">
+          <span class="dot"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Sewing Operator — PT BINTANG INDOKARYA GEMILANG</h3><span class="text-sm muted">Jan 2024 – Now</span></div>
             <ul class="mt-2 list-disc list-inside text-sm muted">
@@ -160,8 +173,9 @@
             </ul>
           </div>
         </div>
-        <div class="reveal-right relative">
-          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
+
+        <div class="relative reveal-right">
+          <span class="dot"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Training Website Development — BOOTCAMP YOGYAKARTA</h3><span class="text-sm muted">Jun 2019 – Aug 2019</span></div>
             <ul class="mt-2 list-disc list-inside text-sm muted">
@@ -170,8 +184,9 @@
             </ul>
           </div>
         </div>
-        <div class="reveal-left relative">
-          <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500"></span>
+
+        <div class="relative reveal-left">
+          <span class="dot"></span>
           <div class="glass rounded-xl p-5">
             <div class="flex flex-wrap justify-between"><h3 class="font-semibold">Admin Gudang — CV ZEALIN PERFUMES (Limbangan)</h3><span class="text-sm muted">Des 2021 – Feb 2022</span></div>
             <ul class="mt-2 list-disc list-inside text-sm muted">
@@ -188,16 +203,16 @@
   <section id="projects" class="py-12">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="reveal text-2xl font-extrabold mb-8">Selected <span class="neon-title">Projects</span></h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="reveal-left glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
+      <div class="grid md:grid-cols-3 gap-6 items-stretch">
+        <div class="reveal-left glass rounded-2xl p-6 tile cursor-pointer h-full" onclick="openModal('Bot Multi-Chain','Bot crypto multi-chain untuk entry cepat, monitoring profit, dan auto-sell.')">
           <h3 class="font-semibold text-lg">🚀 Bot Multi-Chain</h3>
           <p class="muted mt-1 text-sm">Crypto trading automation</p>
         </div>
-        <div class="reveal-up glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE. Konsistensi visual lintas platform.')">
+        <div class="reveal-up glass rounded-2xl p-6 tile cursor-pointer h-full" onclick="openModal('ADZSTORE Branding','Logo, apparel, dan branding untuk ADZSTORE. Konsistensi visual lintas platform.')">
           <h3 class="font-semibold text-lg">🎨 ADZSTORE Branding</h3>
           <p class="muted mt-1 text-sm">Design & Identity</p>
         </div>
-        <div class="reveal-right glass rounded-2xl p-6 tile cursor-pointer" onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
+        <div class="reveal-right glass rounded-2xl p-6 tile cursor-pointer h-full" onclick="openModal('Web Automation Suite','Bot sosial media & dropship tools: topic finder, auto-post, scheduler.')">
           <h3 class="font-semibold text-lg">🌐 Web Automation</h3>
           <p class="muted mt-1 text-sm">Social Media Tools</p>
         </div>
@@ -313,7 +328,7 @@
       window.openModal=(t,b)=>{document.getElementById('modalTitle').textContent=t;document.getElementById('modalBody').textContent=b;document.getElementById('modal').style.display='flex'}
       window.closeModal=()=>document.getElementById('modal').style.display='none'
 
-      // EmailJS (opsional; aman kalau tak dikonfigurasi)
+      // EmailJS (opsional)
       const form=document.getElementById('contactForm'), status=document.getElementById('formStatus');
       form.addEventListener('submit',function(e){
         e.preventDefault();
